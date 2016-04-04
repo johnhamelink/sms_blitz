@@ -40,7 +40,7 @@ defmodule SmsBlitz.Mixfile do
 
   defp package do
     [
-      files: ["lib", "mix.exs", "README*", "LICENSE", "templates"],
+      files: ["lib", "mix.exs", "README*", "LICENSE"],
       maintainers: ["John Hamelink <john@johnhamelink.com>"],
       licenses: ["MIT"],
       links: %{
