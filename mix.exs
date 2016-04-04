@@ -23,12 +23,16 @@ defmodule SmsBlitz.Mixfile do
   end
 
   defp deps(:docs) do
-    deps(:all) ++ [{:inch_ex, "~> 0.5", only: :docs}]
+    deps(:all) ++ [
+      {:inch_ex, "~> 0.5", only: :docs},
+    ]
   end
 
   defp deps(:dev) do
     deps(:all) ++ [
-      {:dialyxir, "~> 0.3"}
+      {:dialyxir, "~> 0.3"},
+      {:ex_doc, "~> 0.11", only: :dev},
+      {:earmark, "~> 0.2", only: :dev}
     ]
   end
 
