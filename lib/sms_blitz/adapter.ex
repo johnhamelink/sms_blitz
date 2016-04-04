@@ -6,5 +6,5 @@ defmodule SmsBlitz.Adapter do
   @type sms_result :: %{id: String.t, result_string: String.t, status_code: number}
 
   @callback authenticate(any) :: any
-  @callback send_sms(any, sms_params) :: sms_result
+  @callback send_sms(any, sms_params) :: sms_result | [sms_result]
 end

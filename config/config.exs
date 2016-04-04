@@ -30,3 +30,4 @@ use Mix.Config
 #     import_config "#{Mix.env}.exs"
 
 config :sms_blitz, :plivo, {"User ID", "User Token"}
+config :sms_blitz, :itagg, {"Username", "Password", "route"}
