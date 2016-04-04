@@ -2,7 +2,7 @@
   "dialyxir": {:hex, :dialyxir, "0.3.3"},
   "excoveralls": {:hex, :excoveralls, "0.5.1"},
   "exjsx": {:hex, :exjsx, "3.2.0"},
-  "hackney": {:hex, :hackney, "1.6.0"},
+  "hackney": {:hex, :hackney, "1.5.7"},
   "httpoison": {:hex, :httpoison, "0.8.2"},
   "idna": {:hex, :idna, "1.2.0"},
   "jsx": {:hex, :jsx, "2.6.2"},
