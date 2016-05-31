@@ -1,5 +1,5 @@
 defmodule SmsBlitz do
-  alias SmsBlitz.Adapters.{Plivo, Itagg}
+  alias SmsBlitz.Adapters.{Plivo, Itagg, Twilio}
 
   @spec send_sms(atom, SmsBlitz.Adapter.sms_params) :: SmsBlitz.Adapter.sms_result
 
@@ -11,6 +11,12 @@ defmodule SmsBlitz do
   def send_sms(:itagg, from: from, to: to, message: message) when is_binary(from) and is_binary(to) and is_binary(message) do
     Itagg.authenticate(Application.get_env(:sms_blitz, :itagg))
     |> Itagg.send_sms(from: from, to: to, message: message)
+  end
+
+  def send_sms(:twilio, from: from, to: to, message: message) when is_binary(from) and is_binary(to) and is_binary(message) do
+    IO.puts("config: #{inspect Application.get_env(:sms_blitz, :twilio)}")
+    Twilio.authenticate(Application.get_env(:sms_blitz, :twilio))
+    |> Twilio.send_sms(from: from, to: to, message: message)
   end
 
 end
