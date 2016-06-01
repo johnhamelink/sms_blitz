@@ -1,9 +1,9 @@
 defmodule SmsBlitz.Adapters.Twilio do
   @base_uri "https://api.twilio.com/2010-04-01/Accounts"
 
-  def authenticate({accoutsid}) do
+  def authenticate({account_sid}) do
     %{
-      uri: Enum.join([@base_uri, accoutsid, "Messages.json"], "/")
+      uri: Enum.join([@base_uri, account_sid, "Messages.json"], "/")
     }
   end
 
