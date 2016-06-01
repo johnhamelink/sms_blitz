@@ -28,6 +28,7 @@ Setting up with SmsBlitz is easy. You simply add the authentication details for 
 ```elixir
 config :sms_blitz, plivo: {"api_token", "api_key"}
 config :sms_blitz, itagg: {"username", "password", "route"}
+config :sms_blitz, twilio: {"account_sid"}
 ```
 
 Then you can send the SMS to the provider as simply as this:
@@ -38,7 +39,13 @@ SmsBlitz.send_sms(:itagg, from: "Johnny", to: "07123456789", message: "Here's Jo
 # Or...
 
 SmsBlitz.send_sms(:plivo, from: "Johnny", to: "07123456789", message: "Here's Johnny!")
+
+# Or...
+
+SmsBlitz.send_sms(:twilio, from: "Johnny", to: "07123456789", message: "Here's Johnny!")
 ```
+
+
 
 The output of the `send_sms/2` command above will either be like:
 
