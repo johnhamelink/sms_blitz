@@ -1,4 +1,5 @@
 # SmsBlitz
+[![Build Status](https://travis-ci.org/johnhamelink/sms_blitz.svg?branch=master)](https://travis-ci.org/johnhamelink/sms_blitz)
 
 SmsBlitz is a library for elixir that allows you to send SMS messages through multiple different providers.
 
