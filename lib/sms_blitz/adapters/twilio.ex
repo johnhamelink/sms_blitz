@@ -20,7 +20,7 @@ defmodule SmsBlitz.Adapters.Twilio do
 
     %{
       id: resp_json["sid"],
-      message: resp_json["error_message"] || resp_json["message"],
+      result_string: resp_json["error_message"] || resp_json["message"],
       status_code: status_code
     }
   end
