@@ -8,7 +8,7 @@ defmodule SmsBlitz.Adapters.Itagg do
       auth: [
         usr: username,
         pwd: password,
-        route: "p"
+        route: route
       ]
     }
   end
