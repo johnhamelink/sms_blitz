@@ -3,7 +3,7 @@ defmodule SmsBlitz.Mixfile do
 
   def project do
     [app: :sms_blitz,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.0",
      description: "Send SMS messages through various different suppliers",
      build_embedded: Mix.env == :prod,
