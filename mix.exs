@@ -19,7 +19,7 @@ defmodule SmsBlitz.Mixfile do
   end
 
   defp deps(:test) do
-    deps(:all) ++ [{:excoveralls, "~> 0.4"}]
+    deps(:all) ++ [{:excoveralls, "~> 0.7"}]
   end
 
   defp deps(:docs) do
@@ -30,15 +30,15 @@ defmodule SmsBlitz.Mixfile do
 
   defp deps(:dev) do
     deps(:all) ++ [
-      {:dialyxir, "~> 0.3"},
-      {:ex_doc, "~> 0.11", only: :dev},
-      {:earmark, "~> 0.2", only: :dev}
+      {:dialyxir, "~> 0.5"},
+      {:ex_doc, "~> 0.16", only: :dev},
+      {:earmark, "~> 1.2", only: :dev}
     ]
   end
 
   defp deps(_), do: [
-    {:hackney, "~> 1.7"},
-    {:httpoison, "~> 0.11"},
+    {:hackney, "~> 1.9"},
+    {:httpoison, "~> 0.13"},
     {:poison, "~> 2.1"}
   ]
 
