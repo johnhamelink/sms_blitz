@@ -37,7 +37,7 @@ defmodule SmsBlitz.Mixfile do
   end
 
   defp deps(_), do: [
-    {:hackney, "~> 1.9"},
+    {:hackney, "~> 1.8"},
     {:httpoison, "~> 0.13"},
     {:poison, "~> 2.1"}
   ]
