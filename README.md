@@ -3,7 +3,7 @@
 
 SmsBlitz is a library for elixir that allows you to send SMS messages through multiple different providers.
 
-SmsBlitz provides a generic behaviour to make it easy to write conforming client libraries, while also making it simple for developers to choose which provider to use (you could use [elibphonenumber](https://github.com/johnhamelink/elibphonenumber) to detect the destination country and use the cheapest provider for that country, for example).
+SmsBlitz provides a generic behaviour to make it easy to write conforming client libraries, while also making it simple for developers to choose which provider to use (you could use [ex_phone_number](https://github.com/socialpaymentsbv/ex_phone_number) to detect the destination country and use the cheapest provider for that country, for example).
 
 ## Installation
 
@@ -29,22 +29,23 @@ Setting up with SmsBlitz is easy. You simply add the authentication details for 
 config :sms_blitz, plivo: {"api_token", "api_key"}
 config :sms_blitz, itagg: {"username", "password", "route"}
 config :sms_blitz, twilio: {"account_sid"}
+config :sms_blitz, nexmo: {"account_key", "account_secret"}
+```
+
+You can find out which adapters are available like so (note that the list of adapters is not the same as the list of adapters which has been configured correctly!):
+
+```elixir
+SmsBlitz.adapters
+# [:plivo, :itagg, :twilio, :nexmo]
 ```
 
 Then you can send the SMS to the provider as simply as this:
 
 ```elixir
-SmsBlitz.send_sms(:itagg, from: "Johnny", to: "07123456789", message: "Here's Johnny!")
-
-# Or...
-
-SmsBlitz.send_sms(:plivo, from: "Johnny", to: "07123456789", message: "Here's Johnny!")
-
-# Or...
-
-SmsBlitz.send_sms(:twilio, from: "Johnny", to: "07123456789", message: "Here's Johnny!")
+SmsBlitz.send_sms(:adapter, from: "Johnny", to: "07123456789", message: "Here's Johnny!")
 ```
 
+Where `:adapter` is the adapter you've chosen from the list.
 
 
 The output of the `send_sms/2` command above will either be like:
