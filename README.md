@@ -13,7 +13,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
   
 ```elixir
         def deps do
-          [{:sms_blitz, "~> 0.0.1"}]
+          [{:sms_blitz, "~> 0.1.1"}]
         end
 ```
 
