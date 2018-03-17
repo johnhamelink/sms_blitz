@@ -22,7 +22,8 @@ defmodule SmsBlitz.Adapters.Twilio do
       From: from
     ]
 
-    handle_response!(HTTPoison.post(auth.uri, {:form, params}))
+    HTTPoison.post(auth.uri, {:form, params})
+    |> handle_response!
   end
 
   defp handle_response!({:ok, %HTTPoison.Response{body: resp, status_code: status_code}}) do

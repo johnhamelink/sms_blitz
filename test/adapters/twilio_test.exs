@@ -18,16 +18,14 @@ defmodule SmsBlitz.Adapters.TwilioTest do
     test "sending an sms successfullly" do
       auth = Twilio.authenticate({@auth_sid})
       sid = "MMabdfcc43604446058f6608b1633cd52f"
-
       response = %{
         "error_message" => nil,
         "sid" => sid,
         "body" => "testing"
       }
-
       fake_response = %HTTPoison.Response{status_code: 200, body: Poison.encode!(response)}
 
-      with_mock HTTPoison, post: fn _, _ -> {:ok, fake_response} end do
+      with_mock HTTPoison, [post: fn(_, _) -> {:ok, fake_response} end] do
         result =
           Twilio.send_sms(auth, from: "+4412345678910", to: "+4423456789101", message: "Testing")
 
@@ -38,15 +36,13 @@ defmodule SmsBlitz.Adapters.TwilioTest do
     test "sending an sms and receiving an error" do
       auth = Twilio.authenticate({@auth_sid})
       sid = "MMabdfcc43604446058f6608b1633cd52f"
-
       response = %{
         "error_message" => "testing error",
         "sid" => sid
       }
 
       fake_response = %HTTPoison.Response{status_code: 500, body: Poison.encode!(response)}
-
-      with_mock HTTPoison, post: fn _, _ -> {:ok, fake_response} end do
+      with_mock HTTPoison, [post: fn(_, _) -> {:ok, fake_response} end] do
         result =
           Twilio.send_sms(auth, from: "+4412345678910", to: "+4423456789101", message: "Testing")
 
