@@ -11,7 +11,8 @@ defmodule SmsBlitz.Mixfile do
      deps: deps(Mix.env),
      test_coverage: [tool: ExCoveralls],
      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test],
-     package: package()]
+     package: package(),
+     dialyzer: [ignore_warnings: "dialyzer.ignore-warnings"]]
   end
 
   def application do
