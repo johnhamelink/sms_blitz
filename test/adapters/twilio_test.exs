@@ -21,7 +21,8 @@ defmodule SmsBlitz.Adapters.TwilioTest do
 
       response = %{
         "error_message" => nil,
-        "sid" => sid
+        "sid" => sid,
+        "body" => "testing"
       }
 
       fake_response = %HTTPoison.Response{status_code: 200, body: Poison.encode!(response)}
@@ -30,7 +31,7 @@ defmodule SmsBlitz.Adapters.TwilioTest do
         result =
           Twilio.send_sms(auth, from: "+4412345678910", to: "+4423456789101", message: "Testing")
 
-        assert result == %{id: sid, result_string: nil, status_code: 200}
+        assert result == %{id: sid, result_string: "testing", status_code: 200}
       end
     end
 
