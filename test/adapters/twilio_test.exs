@@ -6,7 +6,7 @@ defmodule SmsBlitz.Adapters.TwilioTest do
 
   describe "#authenticate" do
     test "authentication with account_sid" do
-      expected = %{
+      expected = %Twilio.Config{
         uri: "https://api.twilio.com/2010-04-01/Accounts/#{@auth_sid}/Messages.json"
       }
 
