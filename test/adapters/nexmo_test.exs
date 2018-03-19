@@ -5,14 +5,11 @@ defmodule SmsBlitz.Adapters.NexmoTest do
   @config {"key", "secret"}
 
   test "#authenticate" do
-    expected = %{
-      auth: %{
-        key: "key",
-        secret: "secret"
-      },
+    expected = %Nexmo.Config{
+      api_key: "key",
+      api_secret: "secret",
       uri: "https://rest.nexmo.com/sms/json"
     }
-
     assert Nexmo.authenticate(@config) == expected
   end
 
