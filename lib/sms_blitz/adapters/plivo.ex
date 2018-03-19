@@ -1,5 +1,5 @@
 defmodule SmsBlitz.Adapters.Plivo do
-
+  @behaviour SmsBlitz.Adapter
   @base_uri "https://api.plivo.com/v1"
 
   def authenticate({user_id, user_token}) do
