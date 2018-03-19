@@ -10,6 +10,7 @@ defmodule SmsBlitz.Adapters.NexmoTest do
       api_secret: "secret",
       uri: "https://rest.nexmo.com/sms/json"
     }
+
     assert Nexmo.authenticate(@config) == expected
   end
 
