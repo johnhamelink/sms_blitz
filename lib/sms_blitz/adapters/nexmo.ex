@@ -38,30 +38,32 @@ defmodule SmsBlitz.Adapters.Nexmo do
     |> handle_response!
   end
 
-  def handle_response!({:ok, %{headers: headers, body: resp, status_code: 200}}) do
+  defp handle_response!({:ok, %{headers: headers, body: resp, status_code: 200}}) do
     handle_messages(headers, Poison.decode!(resp))
   end
 
-  def handle_messages(_, %{"messages" => [%{"status" => status} = response]})
-      when status == "0" do
-    %{
-      id: response["message-id"],
-      result_string: "success",
-      status_code: response["status"]
-    }
+  defp handle_messages(_, %{"messages" => [%{"status" => status, "message-id" => message_id}]})
+       when status == "0" do
+    respond(message_id, "success", status)
   end
 
-  def handle_messages(headers, %{"messages" => [response]}) do
-    {_key, trace_id} =
+  defp handle_messages(headers, %{
+         "messages" => [%{"status" => status, "error-text" => error_text}]
+       }) do
+    {_, trace_id} =
       Enum.find(headers, fn
         {"X-Nexmo-Trace-Id", _} -> true
         _ -> false
       end)
 
+    respond(trace_id, error_text, status)
+  end
+
+  defp respond(id, result, status) do
     %{
-      id: trace_id,
-      result_string: response["error-text"],
-      status_code: response["status"]
+      id: id,
+      result_string: result,
+      status_code: status
     }
   end
 end
