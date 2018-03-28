@@ -11,7 +11,8 @@ defmodule SmsBlitz.Mixfile do
      deps: deps(Mix.env),
      test_coverage: [tool: ExCoveralls],
      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test],
-     package: package]
+     package: package(),
+     dialyzer: [ignore_warnings: "dialyzer.ignore-warnings"]]
   end
 
   def application do
@@ -19,7 +20,7 @@ defmodule SmsBlitz.Mixfile do
   end
 
   defp deps(:test) do
-    deps(:all) ++ [{:excoveralls, "~> 0.7"}]
+    deps(:all) ++ [{:excoveralls, "~> 0.8"}, {:mock, "~> 0.3.1"}]
   end
 
   defp deps(:docs) do
