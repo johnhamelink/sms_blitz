@@ -2,6 +2,7 @@ defmodule SmsBlitz.Adapters.TwilioTest do
   use ExUnit.Case
   alias SmsBlitz.Adapters.Twilio
   import Mock
+  # This token is taken from the Twilio example documentation.
   @auth_sid "ACd2bd41c5a2524f439f82eea7c5ea5c80"
 
   describe "#authenticate" do
