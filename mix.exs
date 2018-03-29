@@ -31,16 +31,16 @@ defmodule SmsBlitz.Mixfile do
 
   defp deps(:dev) do
     deps(:all) ++ [
-      {:dialyxir, "~> 0.5"},
-      {:ex_doc, "~> 0.16", only: :dev},
+      {:dialyxir, "~> 0.5.1", only: :dev},
+      {:ex_doc, "~> 0.18.3", only: :dev},
       {:earmark, "~> 1.2", only: :dev}
     ]
   end
 
   defp deps(_), do: [
     {:hackney, "~> 1.8"},
-    {:httpoison, "~> 0.13"},
-    {:poison, ">= 2.1.0"}
+    {:httpoison, "~> 1.0"},
+    {:poison, "~> 3.1"}
   ]
 
   defp package do
