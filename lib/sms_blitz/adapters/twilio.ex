@@ -3,14 +3,16 @@ defmodule SmsBlitz.Adapters.Twilio do
   @base_uri "https://api.twilio.com/2010-04-01/Accounts"
 
   defmodule Config do
-    defstruct [:uri]
+    defstruct [:uri, :account_sid, :token]
     @type t :: %__MODULE__{}
   end
 
   @spec authenticate({binary()}) :: Config.t
-  def authenticate({account_sid}) do
+  def authenticate({account_sid, token}) do
     %Config{
-      uri: Enum.join([@base_uri, account_sid, "Messages.json"], "/")
+      uri: Enum.join([@base_uri, account_sid, "Messages.json"], "/"),
+      account_sid: account_sid,
+      token: token
     }
   end
 
@@ -19,10 +21,11 @@ defmodule SmsBlitz.Adapters.Twilio do
       when is_binary(from) and is_binary(to) and is_binary(message) do
     params = [
       To: to,
-      From: from
+      From: from,
+      Body: message
     ]
 
-    HTTPoison.post(auth.uri, {:form, params})
+    HTTPoison.post(auth.uri, {:form, params}, %{}, [hackney: [basic_auth: {auth.account_sid, auth.token}]])
     |> handle_response!
   end
 

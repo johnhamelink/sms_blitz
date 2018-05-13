@@ -32,7 +32,7 @@ Setting up with SmsBlitz is easy. You simply add the authentication details for 
 ```elixir
 config :sms_blitz, plivo: {"api_token", "api_key"}
 config :sms_blitz, itagg: {"username", "password", "route"}
-config :sms_blitz, twilio: {"account_sid"}
+config :sms_blitz, twilio: {"account_sid", "auth_token"}
 config :sms_blitz, nexmo: {"account_key", "account_secret"}
 ```
 
