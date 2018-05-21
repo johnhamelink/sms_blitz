@@ -1,6 +1,6 @@
 defmodule SmsBlitz.Adapters.Itagg do
-
-  @base_uri "https://secure.itagg.com/smsg/"
+  @behaviour SmsBlitz.Adapter
+  @base_uri "https://secure.itagg.com/smsg"
 
   def authenticate({username, password, route}) do
     %{
@@ -14,22 +14,11 @@ defmodule SmsBlitz.Adapters.Itagg do
   end
 
   def send_sms(%{uri: uri, auth: auth}, from: from, to: to, message: message) when is_binary(from) and is_binary(to) and is_binary(message) do
+    HTTPoison.post(uri, params(auth, from, to, message))
+    |> handle_response!
+  end
 
-    params = {
-      :form,
-      [
-        from: from,
-        to: to,
-        type: "text",
-        txt: message,
-      ] ++ auth
-    }
-
-    {:ok, %{body: resp, status_code: status_code}} = HTTPoison.post(
-      uri,
-      params
-    )
-
+  defp handle_response!({:ok, %HTTPoison.Response{body: resp, status_code: status_code}}) do
     parse_response(resp)
     |> Enum.map(fn (response) ->
       %{
@@ -69,4 +58,15 @@ defmodule SmsBlitz.Adapters.Itagg do
     end)
   end
 
+  defp params(auth, from, to, message) do
+    {
+      :form,
+      [
+        from: from,
+        to: to,
+        type: "text",
+        txt: message,
+      ] ++ auth
+    }
+  end
 end
