@@ -25,11 +25,11 @@ defmodule SmsBlitz.Adapters.Twilio do
       Body: message
     ]
 
-    HTTPoison.post(auth.uri, {:form, params}, %{}, [hackney: [basic_auth: {auth.account_sid, auth.token}]])
-    |> handle_response!
+    HTTPoison.post!(auth.uri, {:form, params}, %{}, [hackney: [basic_auth: {auth.account_sid, auth.token}]])
+    |> handle_response
   end
 
-  defp handle_response!({:ok, %HTTPoison.Response{body: resp, status_code: status_code}}) do
+  defp handle_response(%HTTPoison.Response{body: resp, status_code: status_code}) do
     resp_json = Poison.decode!(resp)
     %{
       id: resp_json["sid"],

@@ -29,7 +29,7 @@ defmodule SmsBlitz.Adapters.TwilioTest do
       }
       fake_response = %HTTPoison.Response{status_code: 200, body: Poison.encode!(response)}
 
-      with_mock HTTPoison, [post: fn(_, _, _, _) -> {:ok, fake_response} end] do
+      with_mock HTTPoison, [post!: fn(_, _, _, _) -> fake_response end] do
         result =
           Twilio.send_sms(auth, from: "+4412345678910", to: "+4423456789101", message: "Testing")
 
@@ -46,7 +46,7 @@ defmodule SmsBlitz.Adapters.TwilioTest do
       }
 
       fake_response = %HTTPoison.Response{status_code: 500, body: Poison.encode!(response)}
-      with_mock HTTPoison, [post: fn(_, _, _, _) -> {:ok, fake_response} end] do
+      with_mock HTTPoison, [post!: fn(_, _, _, _) -> fake_response end] do
         result =
           Twilio.send_sms(auth, from: "+4412345678910", to: "+4423456789101", message: "Testing")
 
