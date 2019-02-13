@@ -5,6 +5,7 @@ defmodule SmsBlitz.Mixfile do
     [app: :sms_blitz,
      version: "0.2.0",
      elixir: "~> 1.0",
+     elixirc_paths: elixirc_paths(Mix.env()),
      description: "Send SMS messages through various different suppliers",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -18,6 +19,9 @@ defmodule SmsBlitz.Mixfile do
   def application do
     [applications: [:logger, :httpoison]]
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_env), do: ["lib"]
 
   defp deps(:test) do
     deps(:all) ++ [{:excoveralls, "~> 0.8"}, {:mock, "~> 0.3.1"}]
