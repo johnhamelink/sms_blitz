@@ -1,12 +1,13 @@
 defmodule SmsBlitz do
-  alias SmsBlitz.Adapters.{Plivo, Itagg, Twilio, Nexmo}
+  alias SmsBlitz.Adapters.{Plivo, Itagg, Twilio, Nexmo, Test}
 
 
   @adapters %{
     plivo:  Plivo,
     itagg:  Itagg,
     twilio: Twilio,
-    nexmo:  Nexmo
+    nexmo:  Nexmo,
+    test:   Test
   }
 
   def adapters(), do: Map.keys(@adapters)
