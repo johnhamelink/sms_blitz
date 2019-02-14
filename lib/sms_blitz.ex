@@ -2,13 +2,23 @@ defmodule SmsBlitz do
   alias SmsBlitz.Adapters.{Plivo, Itagg, Twilio, Nexmo, Test}
 
 
-  @adapters %{
+  default_adapters = %{
     plivo:  Plivo,
     itagg:  Itagg,
     twilio: Twilio,
     nexmo:  Nexmo,
     test:   Test
   }
+
+  extra_adapters = Application.get_env(:sms_blitz, :extra_adapters)
+
+  adapters = if extra_adapters && is_map(extra_adapters) do
+    Map.merge(default_adapters, extra_adapters)
+  else
+    default_adapters
+  end
+
+  @adapters adapters
 
   def adapters(), do: Map.keys(@adapters)
 
